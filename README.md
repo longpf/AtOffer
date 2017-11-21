@@ -24,11 +24,16 @@
 * [17. 树的子结构](#树的子结构)
 * [18. 二叉树的镜像](#二叉树的镜像)
 * [19. 顺时针打印矩阵](#顺时针打印矩阵)
+* [20. 包含min函数的栈](#包含min函数的栈)
+* [21. 栈的压入、弹出序列](#栈的压入、弹出序列)
 
 
 
-* [学习地址1](http://blog.csdn.net/hubeidaxuesanqi3012/article/details/74090645?locationNum=3&fps=1)
-* [学习地址2](http://www.cnblogs.com/edisonchou/p/3843287.html)
+
+
+* [学习地址1:牛客网](https://www.nowcoder.com/practice/d77d11405cc7470d82554cb392585106?tpId=13&tqId=11174&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+* [学习地址2:鼠标CS的博客](http://blog.csdn.net/hubeidaxuesanqi3012/article/details/74090645?locationNum=3&fps=1)
+* [学习地址3:周旭龙的博客](http://www.cnblogs.com/edisonchou/p/3843287.html)
 
 
 
@@ -941,3 +946,72 @@ public:
 };
 ```
 
+<span id="包含min函数的栈"></span>
+
+### 20. 包含min函数的栈
+
+定义栈的数据结构，请在该类型中实现一个能够得到栈最小元素的min函数
+
+```cpp
+#include <stack>
+using namespace std;
+
+class Solution {
+private:
+    stack<int> s1,s2;
+public:
+    void push(int value) {
+        if (s1.size()>0 && s1.top()<value)
+        {
+            s2.push(s1.top());
+        }
+        else
+        {
+            s2.push(value);
+        }
+        s1.push(value);
+    }
+    void pop() {
+        s1.pop();
+        s2.pop();
+    }
+    int top() {
+        return s1.top();
+    }
+    int min() {
+        return s2.top();
+    }
+};
+```
+
+<span id="栈的压入、弹出序列"><span>
+
+### 21. 栈的压入、弹出序列
+
+输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列  4, 5, 3, 2, 1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）
+
+```cpp
+#include <vector>
+#include <stack>
+
+using namespace std;
+
+class Solution {
+public:
+    bool IsPopOrder(vector<int> pushV,vector<int> popV) {
+        
+        stack<int> st;
+        
+        for (int i = 0,j=0; i < pushV.size(); )
+        {
+            st.push(pushV[i++]);
+            while (j<popV.size() && st.top()==popV[j])
+            {
+                st.pop();
+                j++;
+            }
+        }
+        return st.empty();
+    }
+};
+```
