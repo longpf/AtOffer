@@ -27,6 +27,7 @@
 * [20. 包含min函数的栈](#包含min函数的栈)
 * [21. 栈的压入、弹出序列](#栈的压入、弹出序列)
 * [22. 从上到下打印二叉树](#从上到下打印二叉树)
+* [23. 二叉搜索树的后序遍历序列](#二叉搜索树的后序遍历序列)
 
 
 
@@ -1017,6 +1018,8 @@ public:
 };
 ```
 
+<span id="从上到下打印二叉树"></span>
+
 ### 22. 从上到下打印二叉树
 
 从上往下打印出二叉树的每个节点，同层节点从左至右打印
@@ -1062,6 +1065,50 @@ public:
             }
         }
         return result;
+    }
+};
+```
+
+<span id="二叉搜索树的后序遍历序列"></span>
+
+### 23. 二叉搜索树的后序遍历序列
+
+输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同
+
+```cpp
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    bool VerifySquenceOfBST(vector<int> sequence) {
+        if (sequence.size() == 0)
+            return false;
+        return VerifyBST(sequence, 0, (int)sequence.size()-1);
+    }
+    
+    bool VerifyBST(vector<int> sequence,int start,int end)
+    {
+        int i,j;
+        for (i=start;i<end;i++)
+        {
+            if (sequence[i] > sequence[end])
+                break;
+        }
+        j = i - 1;
+        while (i < end)
+        {
+            if (sequence[i] < sequence[end])
+                return false;
+            i++;
+        }
+        bool left = true;
+        if (j > start)
+            left = VerifyBST(sequence, start, j);
+        bool right = true;
+        if (j+1 < end-1)
+            right = VerifyBST(sequence, j+1, end-1);
+        return left && right;
     }
 };
 ```

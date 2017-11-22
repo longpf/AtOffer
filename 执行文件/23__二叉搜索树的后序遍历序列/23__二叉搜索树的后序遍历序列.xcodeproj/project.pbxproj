@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D30DAF911FC40C870027EF44 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D30DAF901FC40C870027EF44 /* main.cpp */; };
+		D30DAFB71FC51EC20027EF44 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D30DAFB61FC51EC20027EF44 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D30DAF8B1FC40C870027EF44 /* CopyFiles */ = {
+		D30DAFB11FC51EC20027EF44 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -23,13 +23,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D30DAF8D1FC40C870027EF44 /* 21__栈的压入、弹出序列 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "21__栈的压入、弹出序列"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D30DAF901FC40C870027EF44 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		D30DAFBD1FC556D20027EF44 /* 说明.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "说明.jpg"; sourceTree = "<group>"; };
+		D30DAFB31FC51EC20027EF44 /* 23__二叉搜索树的后序遍历序列 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "23__二叉搜索树的后序遍历序列"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D30DAFB61FC51EC20027EF44 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D30DAFBE1FC556E80027EF44 /* 说明.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "说明.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D30DAF8A1FC40C870027EF44 /* Frameworks */ = {
+		D30DAFB01FC51EC20027EF44 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,96 +39,96 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D30DAF841FC40C870027EF44 = {
+		D30DAFAA1FC51EC20027EF44 = {
 			isa = PBXGroup;
 			children = (
-				D30DAF8F1FC40C870027EF44 /* 21__栈的压入、弹出序列 */,
-				D30DAF8E1FC40C870027EF44 /* Products */,
+				D30DAFB51FC51EC20027EF44 /* 23__二叉搜索树的后序遍历序列 */,
+				D30DAFB41FC51EC20027EF44 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		D30DAF8E1FC40C870027EF44 /* Products */ = {
+		D30DAFB41FC51EC20027EF44 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D30DAF8D1FC40C870027EF44 /* 21__栈的压入、弹出序列 */,
+				D30DAFB31FC51EC20027EF44 /* 23__二叉搜索树的后序遍历序列 */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D30DAF8F1FC40C870027EF44 /* 21__栈的压入、弹出序列 */ = {
+		D30DAFB51FC51EC20027EF44 /* 23__二叉搜索树的后序遍历序列 */ = {
 			isa = PBXGroup;
 			children = (
-				D30DAF901FC40C870027EF44 /* main.cpp */,
-				D30DAFBD1FC556D20027EF44 /* 说明.jpg */,
+				D30DAFB61FC51EC20027EF44 /* main.cpp */,
+				D30DAFBE1FC556E80027EF44 /* 说明.jpg */,
 			);
-			path = "21__栈的压入、弹出序列";
+			path = "23__二叉搜索树的后序遍历序列";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D30DAF8C1FC40C870027EF44 /* 21__栈的压入、弹出序列 */ = {
+		D30DAFB21FC51EC20027EF44 /* 23__二叉搜索树的后序遍历序列 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D30DAF941FC40C870027EF44 /* Build configuration list for PBXNativeTarget "21__栈的压入、弹出序列" */;
+			buildConfigurationList = D30DAFBA1FC51EC20027EF44 /* Build configuration list for PBXNativeTarget "23__二叉搜索树的后序遍历序列" */;
 			buildPhases = (
-				D30DAF891FC40C870027EF44 /* Sources */,
-				D30DAF8A1FC40C870027EF44 /* Frameworks */,
-				D30DAF8B1FC40C870027EF44 /* CopyFiles */,
+				D30DAFAF1FC51EC20027EF44 /* Sources */,
+				D30DAFB01FC51EC20027EF44 /* Frameworks */,
+				D30DAFB11FC51EC20027EF44 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "21__栈的压入、弹出序列";
-			productName = "21__栈的压入、弹出序列";
-			productReference = D30DAF8D1FC40C870027EF44 /* 21__栈的压入、弹出序列 */;
+			name = "23__二叉搜索树的后序遍历序列";
+			productName = "23__二叉搜索树的后序遍历序列";
+			productReference = D30DAFB31FC51EC20027EF44 /* 23__二叉搜索树的后序遍历序列 */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D30DAF851FC40C870027EF44 /* Project object */ = {
+		D30DAFAB1FC51EC20027EF44 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = longpf;
 				TargetAttributes = {
-					D30DAF8C1FC40C870027EF44 = {
+					D30DAFB21FC51EC20027EF44 = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = D30DAF881FC40C870027EF44 /* Build configuration list for PBXProject "21__栈的压入、弹出序列" */;
+			buildConfigurationList = D30DAFAE1FC51EC20027EF44 /* Build configuration list for PBXProject "23__二叉搜索树的后序遍历序列" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = D30DAF841FC40C870027EF44;
-			productRefGroup = D30DAF8E1FC40C870027EF44 /* Products */;
+			mainGroup = D30DAFAA1FC51EC20027EF44;
+			productRefGroup = D30DAFB41FC51EC20027EF44 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D30DAF8C1FC40C870027EF44 /* 21__栈的压入、弹出序列 */,
+				D30DAFB21FC51EC20027EF44 /* 23__二叉搜索树的后序遍历序列 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D30DAF891FC40C870027EF44 /* Sources */ = {
+		D30DAFAF1FC51EC20027EF44 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D30DAF911FC40C870027EF44 /* main.cpp in Sources */,
+				D30DAFB71FC51EC20027EF44 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		D30DAF921FC40C870027EF44 /* Debug */ = {
+		D30DAFB81FC51EC20027EF44 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -183,7 +183,7 @@
 			};
 			name = Debug;
 		};
-		D30DAF931FC40C870027EF44 /* Release */ = {
+		D30DAFB91FC51EC20027EF44 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -231,7 +231,7 @@
 			};
 			name = Release;
 		};
-		D30DAF951FC40C870027EF44 /* Debug */ = {
+		D30DAFBB1FC51EC20027EF44 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -239,7 +239,7 @@
 			};
 			name = Debug;
 		};
-		D30DAF961FC40C870027EF44 /* Release */ = {
+		D30DAFBC1FC51EC20027EF44 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -250,25 +250,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D30DAF881FC40C870027EF44 /* Build configuration list for PBXProject "21__栈的压入、弹出序列" */ = {
+		D30DAFAE1FC51EC20027EF44 /* Build configuration list for PBXProject "23__二叉搜索树的后序遍历序列" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D30DAF921FC40C870027EF44 /* Debug */,
-				D30DAF931FC40C870027EF44 /* Release */,
+				D30DAFB81FC51EC20027EF44 /* Debug */,
+				D30DAFB91FC51EC20027EF44 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D30DAF941FC40C870027EF44 /* Build configuration list for PBXNativeTarget "21__栈的压入、弹出序列" */ = {
+		D30DAFBA1FC51EC20027EF44 /* Build configuration list for PBXNativeTarget "23__二叉搜索树的后序遍历序列" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D30DAF951FC40C870027EF44 /* Debug */,
-				D30DAF961FC40C870027EF44 /* Release */,
+				D30DAFBB1FC51EC20027EF44 /* Debug */,
+				D30DAFBC1FC51EC20027EF44 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D30DAF851FC40C870027EF44 /* Project object */;
+	rootObject = D30DAFAB1FC51EC20027EF44 /* Project object */;
 }
