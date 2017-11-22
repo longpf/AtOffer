@@ -26,6 +26,7 @@
 * [19. 顺时针打印矩阵](#顺时针打印矩阵)
 * [20. 包含min函数的栈](#包含min函数的栈)
 * [21. 栈的压入、弹出序列](#栈的压入、弹出序列)
+* [22. 从上到下打印二叉树](#从上到下打印二叉树)
 
 
 
@@ -1012,6 +1013,55 @@ public:
             }
         }
         return st.empty();
+    }
+};
+```
+
+### 22. 从上到下打印二叉树
+
+从上往下打印出二叉树的每个节点，同层节点从左至右打印
+
+```cpp
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+struct TreeNode {
+    int val;
+    struct TreeNode* left;
+    struct TreeNode* right;
+    TreeNode(int x):
+        val(x),left(NULL),right(NULL){
+            
+        }
+};
+
+class Solution {
+public:
+    vector<int> PrintFromTopToBottom(TreeNode* root)
+    {
+        vector<int> result;
+        if (root==NULL)
+            return result;
+        queue<TreeNode*> q;
+        q.push(root);
+        
+        while (!q.empty())
+        {
+            TreeNode* node = q.front();
+            result.push_back(node->val);
+            q.pop();
+            if (node->left)
+            {
+                q.push(node->left);
+            }
+            if (node->right)
+            {
+                q.push(node->right);
+            }
+        }
+        return result;
     }
 };
 ```
