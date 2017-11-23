@@ -28,6 +28,7 @@
 * [21. 栈的压入、弹出序列](#栈的压入、弹出序列)
 * [22. 从上到下打印二叉树](#从上到下打印二叉树)
 * [23. 二叉搜索树的后序遍历序列](#二叉搜索树的后序遍历序列)
+* [24. 二叉树中和为某一值的路径](#二叉树中和为某一值的路径)
 
 
 
@@ -1109,6 +1110,55 @@ public:
         if (j+1 < end-1)
             right = VerifyBST(sequence, j+1, end-1);
         return left && right;
+    }
+};
+```
+
+<span id="二叉树中和为某一值的路径"></span>
+
+### 24. 二叉树中和为某一值的路径
+
+输入一颗二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径
+
+```cpp
+#include <vector>
+
+using namespace std;
+
+struct TreeNode {
+    int val;
+    struct TreeNode* left;
+    struct TreeNode* right;
+    TreeNode(int x):
+        val(x),left(NULL),right(NULL){
+        }
+};
+
+class Solution {
+public:
+    vector<vector<int> > FindPath(TreeNode* root,int expectNumber) {
+        vector<vector<int>> res;
+        if (root == NULL)
+            return res;
+        vector<int> solution;
+        findPath(root, expectNumber, solution, res);
+        return res;
+    }
+    void findPath(TreeNode* root,int expectNumber,vector<int>& solution,vector<vector<int>>&res)
+    {
+        int sum = expectNumber - root->val;
+        solution.push_back(root->val);
+        //判断是否为叶结点,并且sum是否加满了
+        if (root->left == NULL && root->right==NULL && sum==0)
+        {
+            res.push_back(solution);
+        }
+        if (root->left)
+            findPath(root->left, sum, solution, res);
+        if (root->right)
+            findPath(root->right, sum, solution, res);
+        //往后推一个
+        solution.pop_back();
     }
 };
 ```
