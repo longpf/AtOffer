@@ -33,6 +33,8 @@
 * <a href="#二叉树的前中后序遍历">二叉树的前中后序遍历</a>
 * <a href="#二叉搜索树与双向链表">26. 二叉搜索树与双向链表</a>
 * <a href="#字符串的排列">27. 字符串的排列</a>
+* <a href="#数组中出现次数超过一半的数字">28. 数组中出现次数超过一半的数字</a>
+* <a href="#最小的K个数">29. 最小的K个数</a>
 
 
 
@@ -1548,3 +1550,95 @@ public:
     }
 };
 ```
+
+<a id="数组中出现次数超过一半的数字"></a>
+
+### 28. 数组中出现次数超过一半的数字
+
+数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字.
+
+例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。
+
+由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。
+
+如果不存在则输出0
+
+```cpp
+#include <vector>
+#include <map>
+
+using namespace std;
+typedef map<int,int> MAP;
+
+class Solution {
+public:
+    int MoreThanHalfNum_Solution(vector<int> numbers)
+    {
+        MAP hashInt;
+        for (int i = 0; i < numbers.size(); i++) {
+            hashInt[numbers[i]] = hashInt.find(numbers[i])==hashInt.end()?1:hashInt[numbers[i]]+1;
+        }
+        MAP::iterator it = hashInt.begin();
+        int max = it->second;
+        int key = it->first;
+        while (it != hashInt.end()) {
+            if (it->second > max)
+            {
+                max = it->second;
+                key = it->first;
+            }
+            it++;
+        }
+        if (max > numbers.size()/2)
+        {
+            return key;
+        }
+        return 0;
+    }
+};
+
+class Solution2 {
+public:
+    int MoreThanHalfNum_Solution(vector<int> numbers)
+    {
+        int res = 0;
+        int count = 0;
+        //找到数量最多的数字
+        for (int i = 0;i < numbers.size();i++)
+        {
+            if (count == 0)
+            {
+                res = numbers[i];
+                count++;
+            }
+            else if(numbers[i] == res)
+            {
+                count++;
+            }
+            else
+            {
+                count--;
+            }
+        }
+        if (res)
+        {
+            count = 0;
+            for (int i = 0; i < numbers.size(); i++) {
+                if (numbers[i] == res)
+                    count++;
+            }
+            if (count * 2 <= numbers.size())
+                res = 0;
+        }
+        return res;
+    }
+};
+```
+
+<a id="最小的K个数"></a>
+
+### 29. 最小的K个数
+
+输入n个整数，找出其中最小的K个数。
+
+例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4
