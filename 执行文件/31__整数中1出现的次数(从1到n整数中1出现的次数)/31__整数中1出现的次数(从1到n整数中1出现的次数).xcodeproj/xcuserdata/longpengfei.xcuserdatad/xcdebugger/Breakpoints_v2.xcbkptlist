@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "31__&#x6574;&#x6570;&#x4e2d;1&#x51fa;&#x73b0;&#x7684;&#x6b21;&#x6570;(&#x4ece;1&#x5230;n&#x6574;&#x6570;&#x4e2d;1&#x51fa;&#x73b0;&#x7684;&#x6b21;&#x6570;)/main.cpp"
+            timestampString = "534061024.347608"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "NumberOf1Between1AndN_Solution(int n)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
