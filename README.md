@@ -39,6 +39,7 @@
 * <a href="#连续子数组的最大和">30. 连续子数组的最大和</a>
 * <a href="#整数中1出现的次数(从1到n整数中1出现的次数)">31. 整数中1出现的次数(从1到n整数中1出现的次数)</a>
 * <a href="#把数组排成最小的数">32. 把数组排成最小的数</a>
+* <a href="#丑数">33. 丑数</a>
 
 
 
@@ -1856,6 +1857,44 @@ public:
         string num1 = s1 + s2;
         string num2 = s2 + s1;
         return num1 < num2;
+    }
+};
+```
+
+<a id="丑数"></a>
+
+### 33. 丑数
+
+把只包含因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含因子7。习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数
+
+```cpp
+#include <vector>
+
+using namespace std;
+
+class Solution {
+public:
+    int GetUglyNumber_Solution(int index) {
+        if (index <= 0)
+            return 0;
+        int i = 1;
+        int two = 0;
+        int three = 0;
+        int five = 0;
+        vector<int> ugly(index,0);
+        ugly[0] = 1;
+        while (i < index)
+        {
+            ugly[i] = min(min(ugly[two]*2, ugly[three]*3), ugly[five]*5);
+            while (ugly[two]*2 <= ugly[i])
+                two++;
+            while (ugly[three]*3 <= ugly[i])
+                three++;
+            while (ugly[five]*5 <= ugly[i])
+                five++;
+            i++;
+        }
+        return ugly[index-1];
     }
 };
 ```
