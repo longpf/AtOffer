@@ -40,6 +40,7 @@
 * <a href="#整数中1出现的次数(从1到n整数中1出现的次数)">31. 整数中1出现的次数(从1到n整数中1出现的次数)</a>
 * <a href="#把数组排成最小的数">32. 把数组排成最小的数</a>
 * <a href="#丑数">33. 丑数</a>
+* <a href="#第一个只出现依次的字符">34. 第一个只出现依次的字符</a>
 
 
 
@@ -1895,6 +1896,45 @@ public:
             i++;
         }
         return ugly[index-1];
+    }
+};
+```
+
+<a id="第一个只出现依次的字符"></a>
+
+### 34. 第一个只出现依次的字符
+
+在一个字符串(1<=字符串长度<=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置
+
+```cpp
+#include <vector>
+#include <string>
+
+using namespace std;
+
+class Solution {
+public:
+    int FirstNotRepeatingChar(string str) {
+        //由于字符(char)是一个长度为8的数据类型,因此总共有可能256种可能.
+        vector<int> num(256,0);
+        int n = (int)str.length();
+        if (n == 0)
+            return -1;
+        for (int i = 0; i < n; i++)
+        {
+            int c = str[i];
+            num[c] ++;
+        }
+        int res = -1;
+        for (int i = 0 ; i < n; i++)
+        {
+            if (num[str[i]] == 1)
+            {
+                res = i;
+                break;
+            }
+        }
+        return res;
     }
 };
 ```
