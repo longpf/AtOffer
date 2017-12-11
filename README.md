@@ -45,6 +45,7 @@
 * <a href="#两个链表的第一个公共结点">36. 两个链表的第一个公共结点</a>
 * <a href="#数字在排序数组中出现的次数">37. 数字在排序数组中出现的次数</a>
 * <a href="#二叉树的深度">38. 二叉树的深度</a>
+* <a href="#平衡二叉树">39. 平衡二叉树</a>
 
 
 
@@ -2209,6 +2210,54 @@ public:
         if (pRoot->right)
             right = TreeDepth(pRoot->right);
         return 1 + max(left, right);
+    }
+};
+```
+
+<a id="平衡二叉树"></a>
+
+### 39. 平衡二叉树
+
+输入一棵二叉树，判断该二叉树是否是平衡二叉树
+
+```cpp
+#include <iostream>
+
+struct TreeNode {
+    int val;
+    struct TreeNode* left;
+    struct TreeNode* right;
+    TreeNode(int x):
+        val(x),left(NULL),right(NULL){
+            
+        }
+};
+
+class Solution {
+public:
+    bool IsBalanced_Solution(TreeNode* pRoot){
+        if (pRoot == NULL)
+            return true;
+        int depth = 0;
+        return Balance(pRoot, depth);
+    }
+    
+    //后序遍历保证每个结点只被遍历一次
+    bool Balance(TreeNode* pRoot,int& depth)
+    {
+        if (pRoot == NULL)
+            return true;
+        int left = 0,right = 0;
+        if (Balance(pRoot->left, left) && Balance(pRoot->right, right))
+        {
+            int dif = left - right;
+            if (dif >= -1 && dif <= 1)
+            {
+                depth = left > right ? left + 1 : right + 1;
+                return true;
+            }
+        }
+        return false;
     }
 };
 ```
