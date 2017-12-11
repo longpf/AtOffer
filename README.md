@@ -46,6 +46,7 @@
 * <a href="#数字在排序数组中出现的次数">37. 数字在排序数组中出现的次数</a>
 * <a href="#二叉树的深度">38. 二叉树的深度</a>
 * <a href="#平衡二叉树">39. 平衡二叉树</a>
+* <a href="#数组中只出现一次的数字">40. 数组中只出现一次的数字</a>
 
 
 
@@ -2221,6 +2222,12 @@ public:
 输入一棵二叉树，判断该二叉树是否是平衡二叉树
 
 ```cpp
+
+/**
+ 平衡二叉树,左右字数都是平衡二叉树
+ 左右字数深度最多相差1
+*/
+
 #include <iostream>
 
 struct TreeNode {
@@ -2258,6 +2265,71 @@ public:
             }
         }
         return false;
+    }
+};
+```
+
+<a id="数组中只出现一次的数字"></a>
+
+### 40. 数组中只出现一次的数字
+
+一个整型数组里除了两个数字之外，其他的数字都出现了两次。请写程序找出这两个只出现一次的数字
+
+```cpp
+/**
+ 两个相同的数异或为0,0异或5等于5
+ 先对数组中每个数进行异或,将得到的数的第一个为1的位作为分割位n,
+ 再对原数组分组,以分割位n的0,1分为两个子数组
+ 例:{2,4,3,6,3,2,5,5}
+ 1. 0^=2^=4^=3^=6^=3^=2^=5^=5 = 010
+ 2. 再以分割位的0或者1进行分组,得到{2,3,6,3,2},{4,5,5}
+ 因为4和6的倒数第二位不一样,所以以倒数第二位分组
+ 所以在对两个子数组分别从头到尾异或运算分别得到6和4
+ */
+
+#include <vector>
+
+using namespace std;
+
+class Solution {
+public:
+    void FindNumsAppearOnce(vector<int>data,int* num1,int* num2)
+    {
+        int n = (int)data.size();
+        if(n==0||n<2)
+            return;
+        int res = 0;
+        *num1 = 0;
+        *num2 = 0;
+        for (int i = 0;i < n;i++)
+            res ^= data[i];
+        int k = firstBit(res);
+        for (int i = 0; i < n; i ++)
+        {
+            if (IsEqualOne(data[i], k))
+            {
+                *num1 ^= data[i];
+            }
+            else
+            {
+                *num2 ^= data[i];
+            }
+        }
+    }
+    
+    int firstBit(int res)
+    {
+        int count = 0;
+        while ((res & 0x1)==0 && (count < 8 * sizeof(int)))
+        {
+            res >>= 1;
+            count ++;
+        }
+        return count;
+    }
+    bool IsEqualOne(int num,int k)
+    {
+        return (num >> k) & 0x1;
     }
 };
 ```
