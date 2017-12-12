@@ -47,6 +47,7 @@
 * <a href="#二叉树的深度">38. 二叉树的深度</a>
 * <a href="#平衡二叉树">39. 平衡二叉树</a>
 * <a href="#数组中只出现一次的数字">40. 数组中只出现一次的数字</a>
+* <a href="#和为S的两个数字">41. 和为S的两个数字</a>
 
 
 
@@ -2330,6 +2331,50 @@ public:
     bool IsEqualOne(int num,int k)
     {
         return (num >> k) & 0x1;
+    }
+};
+```
+
+<a id="和为S的两个数字"></a>
+
+### 41. 和为S的两个数字
+
+输入一个递增排序的数组和一个数字S，在数组中查找两个数，是的他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。
+
+输出描述：对应每个测试案例，输出两个数，小的先输出
+
+```cpp
+/*
+ 两个指针从数组两侧遍历相加比较
+ */
+
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> FindNumbersWithSum(vector<int> array,int sum)
+    {
+        int n = (int)array.size();
+        if (n == 0 || n < 2)
+            return vector<int>();
+        vector<int> res;
+        int small = 0,big = n - 1;
+        while (small < big)
+        {
+            int curSum = array[small] + array[big];
+            if (curSum == sum)
+            {
+                res.push_back(array[small]);
+                res.push_back(array[big]);
+                break;
+            }
+            else if (curSum > sum)
+                big --;
+            else
+                small ++;
+        }
+        return res;
     }
 };
 ```
