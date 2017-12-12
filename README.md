@@ -50,6 +50,7 @@
 * <a href="#和为S的两个数字">41. 和为S的两个数字</a>
 * <a href="#和为S的连续正数序列">42. 和为S的连续正数序列</a>
 * <a href="#翻转单词顺序">43. 翻转单词顺序</a>
+* <a href="#左旋转字符串">44. 左旋转字符串</a>
 
 
 
@@ -2481,6 +2482,52 @@ public:
             str[start] = str[end];
             str[end] = tmp;
             start++;
+            end --;
+        }
+    }
+};
+```
+
+<a id="左旋转字符串"></a>
+
+### 44. 左旋转字符串
+
+汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。是不是很简单？OK，搞定它！
+
+```cpp
+/*
+ 例:'helloworld' => 'worldhello'
+ 可以先翻转前一部分,再翻转后一部分,最后在翻转整个字符串即可
+ 1. 'ollehworld'
+ 2. 'ollehdlrow'
+ 3. 'worldhello'
+ */
+
+#include <string>
+using namespace std;
+class Solution {
+public:
+    string LeftRotateString(string str, int n)
+    {
+        int length = (int)str.length();
+        if (length == 0 || n < 0)
+            return str;
+        n %= length;
+        
+        Reverse(str, 0, n-1);
+        Reverse(str, n, length-1);
+        Reverse(str, 0, length-1);
+        return str;
+    }
+    
+    void Reverse(string& str,int start,int end)
+    {
+        while (start < end)
+        {
+            char tmp = str[start];
+            str[start] = str[end];
+            str[end] = tmp;
+            start ++;
             end --;
         }
     }
