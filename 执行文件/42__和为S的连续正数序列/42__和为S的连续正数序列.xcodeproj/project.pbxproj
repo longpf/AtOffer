@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		D3BE7FFA1FDF78A600EF4E1B /* 42__和为S的连续正数序列 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "42__和为S的连续正数序列"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3BE7FFD1FDF78A600EF4E1B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D3BE80171FDF876800EF4E1B /* 例子.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "例子.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				D3BE7FFD1FDF78A600EF4E1B /* main.cpp */,
+				D3BE80171FDF876800EF4E1B /* 例子.png */,
 			);
 			path = "42__和为S的连续正数序列";
 			sourceTree = "<group>";
