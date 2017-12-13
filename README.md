@@ -52,6 +52,7 @@
 * <a href="#翻转单词顺序">43. 翻转单词顺序</a>
 * <a href="#左旋转字符串">44. 左旋转字符串</a>
 * <a href="#扑克牌的顺子">45. 扑克牌的顺子</a>
+* <a href="#圆圈中最后剩下的数字"><46. 圆圈中最后剩下的数字></a>
 
 
 
@@ -2570,6 +2571,50 @@ public:
         if (zero >= dif)
             return true;
         return false;
+    }
+};
+```
+
+<a id="圆圈中最后剩下的数字"></a>
+
+### 46. 圆圈中最后剩下的数字
+
+0,1,...,n-1这n个数字排成一个圆圈,从数字0开始每次从这个圆圈里删除第m个数字.
+求出这个圆圈里剩下的最后一个数字
+
+```cpp
+#include <list>
+#include <iostream>
+using namespace std;
+
+class Solution {
+public:
+    int LastRemaining_Solution(int n, int m)
+    {
+        if (n < 1 || m < 1)
+            return -1;
+        list<int> numbers;
+        int i = 0;
+        for (;i < n;i++)
+            numbers.push_back(i);
+        list<int>::iterator iter = numbers.begin();
+        while (numbers.size() > 1)
+        {
+            for (i = 1; i < m ;i++)
+            {
+                iter++;
+                if (iter == numbers.end())
+                    iter = numbers.begin();
+            }
+            
+            list<int>::iterator next = ++iter;
+            --iter;
+            numbers.erase(iter);
+            iter = next;
+            if (iter == numbers.end())
+                iter = numbers.begin();
+        }
+        return *iter;
     }
 };
 ```
