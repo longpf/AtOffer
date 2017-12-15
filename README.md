@@ -53,6 +53,7 @@
 * <a href="#左旋转字符串">44. 左旋转字符串</a>
 * <a href="#扑克牌的顺子">45. 扑克牌的顺子</a>
 * <a href="#圆圈中最后剩下的数字"><46. 圆圈中最后剩下的数字></a>
+* <a href="#求1+2+3+...+n"><47. 求1+2+3+...+n></a>
 
 
 
@@ -2618,3 +2619,85 @@ public:
     }
 };
 ```
+
+<a id="求1+2+3+...+n"></a>
+
+### 47. 求1+2+3+...+n
+
+求1+2+3+...+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）
+
+```cpp
+/*
+ // 方法一: 利用构造函数
+class A
+{
+public:
+    A()
+    {
+        ++i;
+        sum += i;
+    }
+    static int getsum()
+    {
+        return sum;
+    }
+    static void reset()
+    {
+        i = 0;
+        sum = 0;
+    }
+    
+private:
+    static int i ;
+    static int sum;
+};
+
+int A::i = 0;
+int A::sum = 0;
+
+class Solution{
+public:
+    int Sum_Solution(int n)
+    {
+        A::reset();
+        A* a = new A[n];
+        int res = A::getsum();
+        delete[] a;
+        return res;
+    }
+};
+
+//方法二: 利用虚函数
+class A;
+A* array[2];
+
+class A
+{
+public:
+    virtual int sum(int n)
+    {
+        return 0;
+    }
+};
+class B: public A
+{
+public:
+    virtual int sum(int n)
+    {
+        return ::array[!!n]->sum(n-1)+n;
+    }
+};
+
+class Solution
+{
+public:
+    int Sum_Solution(int n)
+    {
+        A a;
+        B b;
+        ::array[0] = &a;
+        ::array[1] = &b;
+        
+        return ::array[1]->sum(n);
+    }
+};
