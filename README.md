@@ -3046,8 +3046,10 @@ public:
 ### 55. 链表中环的入口结点
 
 一个链表中包含环，请找出该链表的环的入口结点
+<div align="center">
+<img src=https://raw.githubusercontent.com/LongPF/AtOffer/master/执行文件/55__链表中环的入口结点/55__链表中环的入口结点/有环的链表.png width="250" height = 125>
+</div>
 
-![带环的链表](https://raw.githubusercontent.com/LongPF/AtOffer/master/执行文件/55__链表中环的入口结点/55__链表中环的入口结点/有环的链表.png)
 
 ```cpp
 #include <iostream>
@@ -3193,3 +3195,34 @@ public:
 ### 57. 二叉树的下一个结点
 
 给定一个二叉树和其中的一个结点，请找出中序遍历顺序的下一个结点并且返回。注意，树中的结点不仅包含左右子结点，同时包含指向父结点的指针
+
+<div align="center">
+<img src="https://github.com/LongPF/AtOffer/blob/master/执行文件/57__二叉树的下一个结点/57__二叉树的下一个结点/二叉树.png?raw=true" width="230" height="200">
+</div>
+
+```cpp
+class Solution {
+public:
+    TreeLinkNode* GetNext(TreeLinkNode* pNode)
+    {
+        if (pNode == NULL)
+            return NULL;
+        if (pNode->right)
+        {
+            pNode = pNode->right;
+            while (pNode->left)
+            {
+                pNode = pNode->left;
+            }
+            return pNode;
+        }
+        TreeLinkNode* pParent = pNode->next;
+        while (pParent != NULL && pParent->right == pNode)
+        {
+            pNode = pParent;
+            pParent = pParent->next;
+        }
+        return pParent;
+    }
+};
+```
