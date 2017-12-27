@@ -62,6 +62,7 @@
 * <a href="#表示数值的字符串">53. 表示数值的字符串</a>
 * <a href="#字符流中第一个不重复的字符">54. 字符流中第一个不重复的字符</a>
 * <a href="#链表中环的入口结点">55. 链表中环的入口结点</a>
+* <a href="#删除链表中重复的结点">56. 删除链表中重复的结点</a>
 
 
 
@@ -3051,6 +3052,7 @@ public:
 #include <iostream>
 
 /*
+ 解法1 :
  快慢指针,快指针每次走2个节点,慢指针每次走1个节点
  如图 相遇时候 fast走 a+b+c+b
  slow 走 a+b
@@ -3096,6 +3098,91 @@ public:
             pSlow = pSlow->next;
         }
         return pFast;
+    }
+};
+
+/*
+ 解法 2
+ 如果使用set的话思路就简单许多
+ 因为set不能插入相同的数,所以判断插入成功与否即可
+ */
+class Solution
+{
+public:
+    ListNode* EntryNodeOfLoop(ListNode* pHead)
+    {
+        if (pHead == NULL)
+            return NULL;
+        set<int> s;
+        ListNode* n = pHead;
+        while (n)
+        {
+            pair<set<int>::iterator, bool> p = s.insert(n->val);
+            if (p.second == false)
+                return n;
+            n = n->next;
+        }
+        return NULL;
+    }
+};
+
+
+```
+
+<a id="删除链表中重复的结点"></a>
+
+### 56. 删除链表中重复的结点
+
+在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。 
+
+例如，链表1->2->3->3->4->4->5 处理后为 1->2->5
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+struct ListNode {
+    int val;
+    struct ListNode* next;
+    ListNode(int x):
+        val(x),next(NULL){}
+};
+
+class Solution
+{
+public:
+    ListNode* deleteDuplication(ListNode*& pHead)
+    {
+        if (pHead == NULL)
+            return NULL;
+        ListNode* pre = NULL;
+        ListNode* p = pHead;
+        while (p != NULL && p->next != NULL)
+        {
+            if (p->val == p->next->val)
+            {
+                int key = p->val;
+                while (p != NULL && p->val == key)
+                {
+                    ListNode* pToDelete = p;
+                    p = p->next;
+                    delete pToDelete;
+                    pToDelete = NULL;
+                }
+                
+                if (pre == NULL)
+                    pHead = p;
+                else
+                    pre->next = p;
+            }
+            else
+            {
+                pre = p;
+                p = p->next;
+            }
+        }
+        return pHead;
     }
 };
 ```

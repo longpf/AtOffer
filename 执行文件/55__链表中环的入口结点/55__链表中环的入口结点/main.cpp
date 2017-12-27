@@ -11,6 +11,8 @@
  */
 
 #include <iostream>
+#include <set>
+using namespace std;
 
 /*
  快慢指针,快指针每次走2个节点,慢指针每次走1个节点
@@ -27,7 +29,7 @@ struct ListNode {
     ListNode(int x):
         val(x),next(NULL){}
 };
-
+/*
 class Solution {
 public:
     ListNode* EntryNodeOfLoop(ListNode* pHead)
@@ -58,6 +60,31 @@ public:
             pSlow = pSlow->next;
         }
         return pFast;
+    }
+};
+*/
+
+/*
+ 如果使用set的话思路就简单许多
+ 因为set不能插入相同的数,所以判断插入成功与否即可
+ */
+class Solution
+{
+public:
+    ListNode* EntryNodeOfLoop(ListNode* pHead)
+    {
+        if (pHead == NULL)
+            return NULL;
+        set<int> s;
+        ListNode* n = pHead;
+        while (n)
+        {
+            pair<set<int>::iterator, bool> p = s.insert(n->val);
+            if (p.second == false)
+                return n;
+            n = n->next;
+        }
+        return NULL;
     }
 };
 
