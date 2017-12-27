@@ -60,6 +60,7 @@
 * <a href="#构建乘积数组">51. 构建乘积数组</a>
 * <a href="#正则表达式匹配">52. 正则表达式匹配</a>
 * <a href="#表示数值的字符串">53. 表示数值的字符串</a>
+* <a href="#字符流中第一个不重复的字符">54. 字符流中第一个不重复的字符</a>
 
 
 
@@ -2985,6 +2986,54 @@ public:
             return false;
         scanDigit(str);
         return *str == '\0' ? true : false;
+    }
+};
+```
+
+<a id="字符流中第一个不重复的字符"></a>
+
+### 54. 字符流中第一个不重复的字符
+
+请实现一个函数用来找出字符流中第一个只出现一次的字符。例如，当从字符流中只读出前两个字符"go"时，第一个只出现一次的字符是"g"。当从该字符流中读出前六个字符“google"时，第一个只出现一次的字符是"l"
+
+输入描述：如果当前字符流没有存在出现一次的字符，返回#字符
+
+```cpp
+#include <string>
+#include <vector>
+using namespace std;
+
+class Solution1
+{
+public:
+    string str;
+    //Insert one char from stringstream
+    void Insert(char ch)
+    {
+        str += string(1,ch);
+    }
+    //return the first appearence once char in current stringstream
+    char FirstAppearingOnce()
+    {
+        vector<int> hash(256,0); //char长度为8,所以256中可能
+        char res = '#';
+        int n = (int)str.length();
+        for (int i = 0;i < n;i++)
+        {
+            if (hash[str[i]] == 0)
+                hash[str[i]] = 1;
+            else
+                hash[str[i]] = -1;
+        }
+        for (int i = 0; i < n;i++)
+        {
+            if (hash[str[i]]==1)
+            {
+                res = str[i];
+                break;
+            }
+        }
+        return res;
     }
 };
 ```
