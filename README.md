@@ -68,6 +68,7 @@
 * <a href="#把二叉树打印成多行">59. 把二叉树打印成多行</a>
 * <a href="#按之字形顺序打印二叉树">60. 按之字形顺序打印二叉树</a>
 * <a href="#序列化二叉树">61. 序列化二叉树</a>
+* <a href="#二叉搜索树的第k个结点">62. 二叉搜索树的第k个结点<a/>
 
 
 
@@ -3464,6 +3465,62 @@ public:
         pRoot->left = Deserialize(str);
         pRoot->right = Deserialize(str);
         return pRoot;
+    }
+};
+```
+
+<a id="二叉搜索树的第k个结点"></a>
+
+### 62. 二叉搜索树的第k个结点
+
+给定一颗二叉搜索树，请找出其中的第k大的结点。例如， 5 / \ 3 7 /\ /\ 2 4 6 8 中，按结点数值大小顺序第三个结点的值为4
+
+```cpp
+/*
+ 二叉搜索树的特点是左子结点小于根结点,根几点小于右子结点
+ 所以进行一次中序查找即可
+ */
+
+#include <iostream>
+
+struct TreeNode {
+    int val;
+    struct TreeNode* left;
+    struct TreeNode* right;
+    TreeNode(int x):
+        val(x),left(NULL),right(NULL){}
+};
+
+class Solution {
+public:
+    TreeNode* KthNode(TreeNode* pRoot,int k)
+    {
+        if (pRoot == NULL || k <= 0)
+        {
+            return NULL;
+        }
+        return KthNodeCore(pRoot, k);
+    }
+    TreeNode* KthNodeCore(TreeNode* pRoot,int& k)
+    {
+        if (pRoot == NULL || k <=0)
+            return NULL;
+        TreeNode* res = NULL;
+        if (pRoot->left != NULL)
+            res = KthNodeCore(pRoot->left, k);
+        if (res == NULL)
+        {
+            if (k == 1)
+            {
+                res = pRoot;
+                return res;
+            }
+            k --;
+        }
+        //res!=NULL时候则找到了结果
+        if (res == NULL && pRoot->right != NULL)
+            res = KthNodeCore(pRoot->right, k);
+        return res;
     }
 };
 ```
