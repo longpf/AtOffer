@@ -33,8 +33,6 @@ public:
                 flag = true;
             else if (i == 0 && str[i]== '+')
                 continue;
-            else if (i == 9 && str[i] == '+')
-                continue;
             else if (str[i] >= '0' && str[i] <= '9')
             {
                 res = res*10+str[i]-'0';
