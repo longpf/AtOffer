@@ -34,7 +34,7 @@
 * <a href="#二叉搜索树与双向链表">26. 二叉搜索树与双向链表</a>
 * <a href="#字符串的排列">27. 字符串的排列</a>
 * <a href="#数组中出现次数超过一半的数字">28. 数组中出现次数超过一半的数字</a>
-* <a href="#红黑树,快排,堆排">红黑树,快排,堆排</a>
+* <a href="#红黑树,快排,堆排">红黑树,快排,堆排,合并排序</a>
 * <a href="#最小的K个数">29. 最小的K个数</a>
 * <a href="#连续子数组的最大和">30. 连续子数组的最大和</a>
 * <a href="#整数中1出现的次数(从1到n整数中1出现的次数)">31. 整数中1出现的次数(从1到n整数中1出现的次数)</a>
@@ -905,6 +905,30 @@ public:
             Mirror(pRoot->right);
     }
 };
+
+非递归解法
+class Solution {
+ public:
+ void Mirror(TreeNode *pRoot) {
+    if(pRoot==NULL) return;
+    stack<TreeNode*> s;
+    s.push(pRoot);
+    while(!s.empty())
+     {
+         TreeNode *head = s.top();
+         s.pop();
+         if(head->left||head->right)
+         {
+             TreeNode *tmp = head->left;
+             head->left = head->right;
+             head->right = tmp;
+         }
+         if (head->left) s.push(head->left);
+         if (head->right) s.push(head->right);
+      }
+    }
+};
+
 ```
 
 <a id="顺时针打印矩阵"></a>
@@ -1689,9 +1713,9 @@ public:
 };
 ```
 
-<a id="红黑树,快排,堆排"></a>
+<a id="红黑树,快排,堆排,合并排序"></a>
 
-### 红黑树,快排,堆排
+### 红黑树,快排,堆排,合并排序
 
 [红黑树](https://www.cnblogs.com/skywang12345/p/3245399.html)
 
@@ -1700,6 +1724,52 @@ public:
 [堆排](https://www.cnblogs.com/jingmoxukong/p/4303826.html)
 
 <a id="最小的K个数"></a>
+
+**合并排序**
+
+```cpp
+//将有二个有序数列a[first...mid]和a[mid...last]合并
+void mergearray(int a[],int first,int mid,int last,int temp[])
+{
+	int i = first,j = mid+1;
+	int m = mid,n = last;
+	int k = 0;
+	while (i<=m && j <= n)
+	{
+		if (a[i]<=a[j])
+			temp[k++] = a[i++];
+		else
+			temp[k++] = a[j++];
+		// printf("%d\n", temp[k]);
+	}
+	while (i <= m)
+		temp[k++] = a[i++];
+	while (j <= n)
+		temp[k++] = a[j++];
+	for (int i = 0; i < k; ++i)
+		a[first+i] = temp[i];
+}
+
+
+void mergesort(int a[],int first,int last,int temp[])
+{
+	if (first<last)
+	{
+		int mid = (first+last)/2;
+		mergesort(a,first,mid,temp);
+		mergesort(a,mid+1,last,temp);
+		mergearray(a,first,mid,last,temp);
+	}
+}
+
+void MergeSort(int a[],int n)
+{
+	int *p = new int[n];
+	if (p == NULL) return;
+	mergesort(a,0,n-1,p);
+	delete[] p;
+}
+```
 
 ### 29. 最小的K个数
 
