@@ -43,7 +43,7 @@ public:
         if (i > e2)
             return NULL;
         TreeNode* head = new TreeNode(pre[s1]);
-        head->left = constructTree(pre, s1+1, s1+i-s2, vin, s2, i-1); //s1+i-s2减s2是因为i是从s2开始for循环
+        head->left = constructTree(pre, s1+1, s1+i-s2, vin, s2, i-1); //s1+i-s2,i-s2是左子树的个数.前序是根左右,根后面是左子树的集合.
         head->right = constructTree(pre, s1+i-s2+1, e1, vin, i+1, e2);
         return head;
     }
