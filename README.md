@@ -668,6 +668,29 @@ public:
 
 ### 12. 数值的整数次方
 
+解法1: 再看一次的解法,牛客网验证通过
+
+```cpp
+double  Power(double base,int exponent){
+if (base==0&&exponent<0) return 0;
+if (base==0) return 0;
+bool flag1 = base>0?true:false;
+bool flag2 = exponent>0?true:false;
+double abs_base = flag1?base:-base;
+int abs_exponent = flag2?exponent:-exponent;
+double tmp = 1;
+while (abs_exponent>0) {
+    tmp *= abs_base;
+    abs_exponent--;
+}
+tmp = flag2 ? tmp : 1.0 / tmp;
+tmp = flag1 ? tmp : -tmp;
+return tmp;
+}
+```
+
+解法2: 
+
 ```cpp
 class Solution{
 public:
