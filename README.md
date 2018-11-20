@@ -874,7 +874,42 @@ public:
 
 输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则
 
-~~~cpp
+解法1:
+
+```cpp
+ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
+{
+    if (pHead1==NULL) return pHead2;
+    if (pHead2==NULL) return pHead1;
+    ListNode *res = new ListNode(-1);
+    ListNode *n = res;
+    while (pHead1 && pHead2) {
+        if (pHead1->val<pHead2->val){
+            n->next = pHead1;
+            n = n->next;
+            pHead1 = pHead1->next;
+        }else{
+            n->next = pHead2;
+            n = n->next;
+            pHead2 = pHead2->next;
+        }
+    }
+    if(pHead1==NULL){
+        n->next = pHead2;
+    }
+    if (pHead2==NULL) {
+        n->next = pHead1;
+    }
+    n = res;
+    res = res->next;
+    delete n;
+    return res;
+}
+```
+
+解法2: 
+
+```cpp
 struct ListNode{
     int val;
     struct ListNode* next;
@@ -905,7 +940,7 @@ public:
         return newHead;
     }
 };
-~~~
+```
 
 <a id="树的子结构"></a>
 
