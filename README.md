@@ -1268,6 +1268,39 @@ public:
 
 　　Step4.重复以上步骤递归判断左右子树是不是二叉搜索树，如果都是，则返回true，如果不是，则返回false;
 
+下面两种写法思路大体相同,如上面的分析
+
+写法1:
+
+```cpp
+bool VerifySquenceOfBST(vector<int> sequence){
+    if (sequence.size()<=1) return true;
+    return verifySquence(sequence, 0, sequence.size()-1);
+}
+//  4,8,6,12,16,14,10
+bool verifySquence(vector<int> sequence,int begin,int end){
+    if (begin<end) {
+        int root = sequence[end];
+        int leftIndex = begin;
+        while (begin < end && sequence[begin]<root) {
+            begin++;
+        }
+        leftIndex = begin-1;
+        while (begin<end && sequence[begin]>root) {
+            begin++;
+        }
+        if (begin==end) {
+            return verifySquence(sequence, begin, leftIndex)&&verifySquence(sequence, leftIndex+1, end-1);
+        }else{
+            return false;
+        }
+    }
+    return true;
+}
+```
+
+写法2: 
+
 ```cpp
 #include <vector>
 using namespace std;
