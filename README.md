@@ -1678,6 +1678,42 @@ void PostOrder2(TreeNode* root)
 
 二叉查找树（Binary Search Tree），（又：二叉搜索树，二叉排序树）它或者是一棵空树，或者是具有下列性质的二叉树： 若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值； 若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值； 它的左、右子树也分别为二叉排序树。
 
+下面两种写法思路差不多,写法1更好点,都通过
+
+写法1: 
+
+```cpp
+TreeNode* Convert(TreeNode* pRootOfTree){
+    if (pRootOfTree==NULL) return  NULL;
+    vector<TreeNode *> array{};
+    stack<TreeNode *> s{};
+    TreeNode *p = pRootOfTree;
+    while (p || !s.empty()) {
+        if (p) {
+            s.push(p);
+            p = p->left;
+        }else{
+            p = s.top();
+            array.push_back(p);
+            p = p->right;
+            s.pop();
+        }
+    }
+    TreeNode *pre = NULL;
+    for (int i=0; i<array.size(); i++) {
+        p = array[i];
+        p->left = pre;
+        if(i!=0) pre->right = p;
+        pre = p;
+    }
+    p->right = NULL;
+    return array[0];
+}
+```
+
+写法2:
+
+
 ```cpp
 
 #include <vector>
