@@ -2253,6 +2253,67 @@ public:
         
 对于%100的数据,size<=2*10^5
     
+解法1:
+
+解法1用的就是常写的归并排序方法,验证通过
+
+```cpp
+int InversePairs(vector<int> data) {
+    int count = 0;
+    int n = data.size();
+    int *a = new int[n]{0};
+    for (int i=0;i<data.size();i++){
+        a[i] = data[i];
+    }
+    MergeSort(a,data.size(),count);
+    return count;
+}
+    
+void mergearray(int a[],int low,int mid,int high,int tmp[],int &count){
+    int i = low,j = mid+1;
+    int m = mid,n = high;
+    int k = 0;
+    while(i<=m&&j<=n){
+        if (a[i] <= a[j])
+        {
+            tmp[k++] = a[i++];
+        }
+        else
+        {
+        	//当a[j]>a[i]时候,因为a[i]到a[mid]之间是有序的.所以i到mid之间倒是逆序对
+            count += (mid-i+1);
+            count %= 1000000007;
+            tmp[k++] = a[j++];
+        }
+    }
+    while(i<=m) tmp[k++] = a[i++];
+    while(j<=n) tmp[k++] = a[j++];
+    for (i=0;i<k;i++)
+        a[low+i] = tmp[i];
+}
+    
+void mergesort(int a[],int low,int high,int tmp[],int &count){
+    if (low < high)
+    {
+        int mid = (low+high)/2;
+        mergesort(a,low,mid,tmp,count);
+        mergesort(a,mid+1,high,tmp,count);
+        mergearray(a,low,mid,high,tmp,count);
+    }
+}
+    
+void MergeSort(int a[],int n,int &count){
+    int *tmp = new int[n]{};
+    int low = 0,high = n-1;
+    mergesort(a,low,high,tmp,count);
+    delete[] tmp;
+}
+```
+
+
+解法2:    
+
+    
 ```cpp
 /*
  归并排序
