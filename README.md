@@ -3420,7 +3420,7 @@ public:
             pFast = pFast->next;
         else
             return NULL;
-        while (pFast->next && pSlow != pFast)
+        while (pFast && pSlow != pFast)
         {
             pSlow = pSlow->next;
             pFast = pFast->next;
