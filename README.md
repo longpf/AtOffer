@@ -2575,6 +2575,44 @@ public:
 
 输入一棵二叉树，求该树的深度。从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度
 
+
+解法1: 高富帅解法,利用前序遍历的解法,非递归.验证通过
+
+```cpp
+int TreeDepth2(TreeNode* pRoot){
+    if (pRoot==NULL) return 0;
+    int count = 0;
+    int res = 0;
+    TreeNode *p = pRoot;
+    stack<TreeNode *> s{};
+    while (p || !s.empty()) {
+        if (p) {
+            s.push(p);
+            count ++;
+            if (count>res) {
+                res = count;
+            }
+            p = p->left;
+        }else{
+            p = s.top();
+            cout << p->val;
+            if(p->val==10){
+                cout << "0";
+            }
+            p = p->right;
+            s.pop();
+            // 当有右结点的时候不应该减1操作.
+            if (!p)
+                count--;
+        }
+    }
+    return res;
+}
+```
+
+解法2:
+
+
 ```cpp
 #include <algorithm>
 using namespace std;
