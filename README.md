@@ -2465,6 +2465,43 @@ public:
 
 统计一个数字在排序数组中出现的次数
 
+解法1:
+
+```cpp
+int GetNumberOfK(vector<int>data, int k){
+    int size = data.size();
+    if (size==0) return 0;
+    int first = 0,last = size-1;
+    int mid = (first+last)/2;
+    while (first<last&&data[mid]!=k) {
+        if (data[mid]>k){
+            last = mid-1;
+        }else{
+            first = mid+1;w
+        }
+        mid = (first+last)/2;
+    }
+    if (data[mid]!=k) return 0;
+    int count = 1;
+    int index = mid-1;
+    while (index>=0&&data[index]==k) {
+        count++;
+        index--;
+    }
+    index = mid+1;
+    while (index<size&&data[index]==k) {
+        count++;
+        index++;
+    }
+    
+    return count;
+}
+```
+
+
+解法2:
+
+
 ```cpp
 /*
  因为有序数组,想到二分查找
