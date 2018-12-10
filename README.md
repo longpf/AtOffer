@@ -2703,7 +2703,8 @@ public:
 
 一个整型数组里除了两个数字之外，其他的数字都出现了两次。请写程序找出这两个只出现一次的数字
 
-```cpp
+
+```
 /**
  两个相同的数异或为0,0异或5等于5
  先对数组中每个数进行异或,将得到的数的第一个为1的位作为分割位n,
@@ -2714,6 +2715,48 @@ public:
  因为4和6的倒数第二位不一样,所以以倒数第二位分组
  所以在对两个子数组分别从头到尾异或运算分别得到6和4
  */
+```
+
+下面的解法都是上面的分析的思路
+
+解法1: 验证通过
+
+```cpp
+void FindNumsAppearOnce(vector<int>data,int* num1,int* num2){
+    int n = data.size();
+    int oriBit = 0;
+    for (int i=0; i<n; i++) {
+        oriBit ^= data[i];
+    }
+    if (oriBit==0) return;
+    int c = 0; //记录右移几次
+    while ((oriBit&1)!=1) {
+        oriBit = oriBit >> 1;
+        c ++;
+    }
+    int bit = 1;
+    while (c--) {
+        bit *= 2;
+    }
+    *num1 = 0;
+    *num2 = 0;
+    for (int i=0; i<n; i++) {
+        int num = data[i];
+        if ((num&bit)==bit){
+            *num1 ^= data[i];
+        }else{
+            *num2 ^= data[i];
+        }
+    }
+}
+```
+
+
+解法2: 
+
+
+```cpp
+
 
 #include <vector>
 
