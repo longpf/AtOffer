@@ -2910,6 +2910,44 @@ public:
 
 牛客最近来了一个新员工Fish，每天早晨总是会拿着一本英文杂志，写些句子在本子上。同事Cat对Fish写的内容颇感兴趣，有一天他向Fish借来翻看，但却读不懂它的意思。例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a student.”。Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？
 
+下面两个写法思路一样,只看写法1即可
+
+写法1:
+
+```cpp
+string ReverseSentence(string str){
+    int size = (int)str.size();
+    if (size<=1) return str;
+    ReverseString(str, 0, size-1);
+    int begin = 0,end = 0;
+    bool hasSpace = false;
+    for (int i=1; i<size; i++) {
+        if (str[i]==' '){
+            hasSpace = true;
+            end = i-1;
+            ReverseString(str, begin, end);
+            begin = i+1;
+        }
+        if (i == size-1) {
+            end = size-1;
+            ReverseString(str, begin, end);
+        }
+    }
+    return str;
+}
+
+void ReverseString(string &str,int beign,int end){
+    if (beign>=end) return;
+    for (int i = 0; i<(end+1-beign)/2; i++) {
+        char tmp = str[beign+i];
+        str[beign+i] = str[end-i];
+        str[end-i] = tmp;
+    }
+}
+```
+
+写法2: 
+
 ```cpp
 #include <string>
 
