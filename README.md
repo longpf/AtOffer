@@ -384,7 +384,7 @@ int main(int argc, const char * argv[]) {
 把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。 输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。
 NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
 
-解法1 : 在看这道题时想到中间不一样的处理,更简单,牛客测试通过
+解法1 : 在看这道题时想到不一样的处理,更简单,牛客测试通过
 
 ```cpp
 int Min(vector<int>rotateArray){
@@ -395,7 +395,7 @@ int Min(vector<int>rotateArray){
         while (i<=j) {
             if (rotateArray[mid]==rotateArray[i]){
                 if (i==mid) {
-                    //i==mid的话就说明i==mid==i,或i或j就差一位
+                    //i==mid的话就说明i==mid==j,或i和j就差一位
                     return rotateArray[i]>rotateArray[j]?rotateArray[j]:rotateArray[i];
                 }else{
                     i = mid;
@@ -672,20 +672,20 @@ public:
 
 ```cpp
 double  Power(double base,int exponent){
-if (base==0&&exponent<0) return 0;
-if (base==0) return 0;
-bool flag1 = base>0?true:false;
-bool flag2 = exponent>0?true:false;
-double abs_base = flag1?base:-base;
-int abs_exponent = flag2?exponent:-exponent;
-double tmp = 1;
-while (abs_exponent>0) {
-    tmp *= abs_base;
-    abs_exponent--;
-}
-tmp = flag2 ? tmp : 1.0 / tmp;
-tmp = flag1 ? tmp : -tmp;
-return tmp;
+	if (base==0&&exponent<0) return 0;
+	if (base==0) return 0;
+	bool flag1 = base>0?true:false;
+	bool flag2 = exponent>0?true:false;
+	double abs_base = flag1?base:-base;
+	int abs_exponent = flag2?exponent:-exponent;
+	double tmp = 1;
+	while (abs_exponent>0) {
+	    tmp *= abs_base;
+	    abs_exponent--;
+	}
+	tmp = flag2 ? tmp : 1.0 / tmp;
+	tmp = flag1 ? tmp : -tmp;
+	return tmp;
 }
 ```
 
@@ -2998,6 +2998,31 @@ public:
 ### 44. 左旋转字符串
 
 汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。是不是很简单？OK，搞定它！
+
+解法1: 先计算出每个字符对应的索引,再赋值字符串. 验证通过
+
+```cpp
+string LeftRotateString(string str, int n){
+    int size = (int)str.size();
+    if (n<=0||size==0) return str;
+    n %= size; // 需要注意下 size如果等于0,会出浮点错误,跟除0一样
+    if (n==0) return str;
+    string res = string(str);
+    int k = 0; //原来字符串中的字符 在最终 结果中的 索引
+    for (int i=0; i<size; i++) {
+        if (i>=n) {
+            k = i-n;
+            res[k] = str[i];
+        }else{
+            k = size - (n-i);
+            res[k] = str[i];
+        }
+    }
+    return res;
+}
+```
+
+解法2 : 两次翻转字符串
 
 ```cpp
 /*
