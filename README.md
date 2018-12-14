@@ -3110,6 +3110,48 @@ public:
 0,1,...,n-1这n个数字排成一个圆圈,从数字0开始每次从这个圆圈里删除第m个数字.
 求出这个圆圈里剩下的最后一个数字
 
+解法1: 解法2相对思路更清晰些,解法1验证通过
+
+```cpp
+int LastRemaining_Solution(int n, int m){
+    if (n<1||m<1) return -1;
+    bool *bs =  new bool[n](); //存储哪个被砍掉
+    int k = n,i = 0; //k 记录砍掉几个
+    int tmp = 1;     //m 记录到第几个
+    while (k>1) {
+        while (tmp!=m) {
+            if (bs[i]) i++;
+            else{
+                i++;
+                tmp++;
+            }
+            if (i==n) i = 0;
+            while (bs[i]) {
+                i++;
+                if (i==n) i=0;
+            }
+        }
+        cout << i << endl;
+        bs[i] = true;
+        k--;
+        while (bs[i]) {
+            i++;
+            if (i==n) i=0;
+        }
+        if (i==n) i = 0;
+        tmp = 1;
+    }
+    for (i=0; i<n; i++) {
+        if (!bs[i]) return i;
+    }
+    delete[] bs;
+    return -1;
+}
+```
+
+解法2: 
+
+
 ```cpp
 #include <list>
 #include <iostream>
