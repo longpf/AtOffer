@@ -3427,6 +3427,7 @@ public:
             if (numbers[i] < 0 || numbers[i] > length - 1)
                 return false;
         }
+        i = 0;
         while (i < length)
         {
             if (numbers[i] == i)
