@@ -3318,6 +3318,41 @@ public:
 
 输出描述：如果是合法的数值表达则返回该数字，否则返回0
 
+下面写法差不多,看一个即可
+
+写法1: 
+
+```cpp
+int StrToInt(string str){
+    int n = (int)str.size();
+    if (n<=0 || (n==1&&(str[0]=='-'||str[1]=='+'))) return 0;
+    bool isNeg = false;
+    int res = 0;
+    for (int i=0; i<n; i++) {
+        char c = str[i];
+        if (i==0){
+            if (c=='-'){
+                isNeg = true;
+            }else if(c=='+'){
+                continue;
+            }else if(c>'0'&&c<='9'){
+                res += (c-'0');
+            }else{
+                return 0;
+            }
+        }else{
+            if (c>='0'&&c<='9'){
+                res = res*10+(c-'0');
+            }else{
+                return 0;
+            }
+        }
+    }
+    return isNeg?-res:res;
+}
+```
+
+写法2:
 
 ```cpp
 #include <string>
@@ -3338,8 +3373,6 @@ public:
                 flag = true;
             else if (i == 0 && str[i]== '+')
                 continue;
-            else if (i == 9 && str[i] == '+')
-                continue;
             else if (str[i] >= '0' && str[i] <= '9')
             {
                 res = res*10+str[i]-'0';
@@ -3356,6 +3389,7 @@ public:
     
 };
 ```
+
 
 <a id="数组中重复的数字"></a>
 
