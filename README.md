@@ -992,6 +992,8 @@ public:
 
 ### 18. 二叉树的镜像
 
+跟 <a href="#对称的二叉树">58题 对称的二叉树</a> 有点像
+
 ```cpp
 struct TreeNode {
     int val;
@@ -3802,6 +3804,15 @@ public:
 </div>
 
 ```cpp
+struct TreeLinkNode {
+    int val;
+    struct TreeLinkNode *left;
+    struct TreeLinkNode *right;
+    struct TreeLinkNode *next;
+    TreeLinkNode(int x) :val(x), left(NULL), right(NULL), next(NULL) {      
+    }
+};
+
 class Solution {
 public:
     TreeLinkNode* GetNext(TreeLinkNode* pNode)
@@ -3834,6 +3845,8 @@ public:
 
 请实现一个函数，用来判断一颗二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的
 
+解法1 : 非递归
+
 ```cpp
 #include <iostream>
 
@@ -3845,7 +3858,47 @@ struct TreeNode {
         val(x),left(NULL),right(NULL){}
 };
 
+bool isSymmetrical(TreeNode* pRoot){
+    if (pRoot == NULL) return true;
+    stack<TreeNode *> s1{};
+    stack<TreeNode *> s2{};
+    s1.push(pRoot);
+    s2.push(pRoot);
+    while (!s1.empty()&&!s2.empty()) {
+        TreeNode *l = s1.top();
+        TreeNode *r = s2.top();
+        s1.pop();
+        s2.pop();
+        if (l == NULL && r == NULL) {
+            continue;
+        }else if (l == NULL || r == NULL){
+            return false;
+        }else if (l->val != r->val){
+            return false;
+        }else {
+            if (l->left && r->right) {
+                s1.push(l->left);
+                s2.push(r->right);
+            }else if ((l->left!=NULL&&r->right==NULL)||(l->left==NULL&&r->right!=NULL)){
+                return false;
+            }
+            if (l->right && r->left) {
+                s1.push(l->right);
+                s2.push(r->left);
+            }else if ((l->right!=NULL&&r->left==NULL)&&(l->right==NULL&&r->left!=NULL)){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+    
+```
 
+解法2 : 
+
+
+```cpp
 /*
  从根结点开始遍历
  如果左右有一个为NULL,那么可定不是对称二叉树
