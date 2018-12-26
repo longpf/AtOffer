@@ -4067,6 +4067,8 @@ public:
 
 请实现两个函数，分别用来序列化和反序列化二叉树 
 
+这里需要注意下,堆空间对象释放问题
+
 ```cpp
 #include <string>
 
@@ -4083,33 +4085,33 @@ struct TreeNode {
 class Solution {
 public:
     char* Serialize(TreeNode* root){
-        if (root == NULL)
-            return "$";
+        if (root==NULL) return "$";
         string str = to_string(root->val);
         str += ",";
-        str += Serialize(root->left);
-        str += Serialize(root->right);
-        char* s = new char[str.length()+1];
-        strcpy(s, str.c_str());
-        str += s;
-        return s;
+        char *left = Serialize(root->left);
+        str += left;
+        if (*left!='$') delete left;
+        char *right = Serialize(root->right);
+        str += right;
+        if (*right!='$') delete right;
+        char *tmp = new char[str.size()+1];
+        strcpy(tmp, str.c_str());
+        return tmp;
     }
+    
     TreeNode* Deserialize(char*& str){
-        if (str == NULL)
-            return NULL;
-        if (*str == '$')
-        {
+        if (str==NULL) return NULL;
+        if (*str=='$') {
             str++;
             return NULL;
         }
         int val = 0;
-        while (*str != ',')
-        {
-            val = val * 10 + (*str-'0');
-            str ++;
+        while (*str!=',') {
+            val = val*10+(*str-'0');
+            str++;
         }
         str++;
-        TreeNode* pRoot = new TreeNode(val);
+        TreeNode *pRoot = new TreeNode(val);
         pRoot->left = Deserialize(str);
         pRoot->right = Deserialize(str);
         return pRoot;
@@ -4117,11 +4119,39 @@ public:
 };
 ```
 
+
 <a id="二叉搜索树的第k个结点"></a>
 
 ### 62. 二叉搜索树的第k个结点
 
 给定一颗二叉搜索树，请找出其中的第k大的结点。例如， 5 / \ 3 7 /\ /\ 2 4 6 8 中，按结点数值大小顺序第三个结点的值为4
+
+解法1和解法2都是用一次中序二叉树遍历,解法1 非递归,解法2递归
+
+解法1 :
+
+```cpp
+TreeNode* KthNode(TreeNode* pRoot,int k){
+    if (pRoot==NULL||k<=0) return NULL;
+    stack<TreeNode *>s{};
+    TreeNode *p = pRoot;
+    while (p || !s.empty()) {
+        if (p) {
+            s.push(p);
+            p = p->left;
+        }else{
+            p = s.top();
+            if (--k==0) return p;
+            p = p->right;
+            s.pop();
+        }
+    }
+    return NULL;
+}
+```
+
+解法2 :
+
 
 ```cpp
 /*
