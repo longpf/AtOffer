@@ -384,6 +384,35 @@ int main(int argc, const char * argv[]) {
 把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。 输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。
 NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
 
+解法1： 牛客验证通过
+
+```cpp
+int Min(vector<int>&rotateArray){
+    int n = rotateArray.size();
+    if (n==0) return 0;
+    int i = 0,j = n-1;
+    int mid = (i+j)/2;
+    cout << rotateArray[0] << endl;
+    while (i<=j) {
+        if (i == mid) {
+            return rotateArray[i]>rotateArray[j]?rotateArray[j]:rotateArray[i];
+        }
+        else if (rotateArray[i]<=rotateArray[mid] && rotateArray[mid]<=rotateArray[j]){
+            return rotateArray[i];
+        }
+        else if (rotateArray[j]>=rotateArray[mid]&&rotateArray[mid]<rotateArray[i]){
+            j = mid;
+            mid = (i+j)/2;
+        }else if(rotateArray[i]<=rotateArray[mid]&&rotateArray[mid]>rotateArray[j]){
+            i = mid;
+            mid = (i+j)/2;
+        }
+    }
+    return 0;
+}
+```
+
+解法2：
 
 ```cpp
 #include <iostream>
