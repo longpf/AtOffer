@@ -1282,6 +1282,7 @@ bool verifySquence(vector<int> sequence,int begin,int end){
     if (begin<end) {
         int root = sequence[end];
         int leftIndex = begin;
+        int leftBegin = begin;
         while (begin < end && sequence[begin]<root) {
             begin++;
         }
@@ -1290,7 +1291,7 @@ bool verifySquence(vector<int> sequence,int begin,int end){
             begin++;
         }
         if (begin==end) {
-            return verifySquence(sequence, begin, leftIndex)&&verifySquence(sequence, leftIndex+1, end-1);
+            return verifySquence(sequence, leftBegin, leftIndex)&&verifySquence(sequence, leftIndex+1, end-1);
         }else{
             return false;
         }
