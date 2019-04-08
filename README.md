@@ -397,6 +397,7 @@ int Min(vector<int>&rotateArray){
         if (i == mid) {
             return rotateArray[i]>rotateArray[j]?rotateArray[j]:rotateArray[i];
         }
+        // 元素都相等或者旋转数组正好旋转次数等于数组大小,等于没旋转
         else if (rotateArray[i]<=rotateArray[mid] && rotateArray[mid]<=rotateArray[j]){
             return rotateArray[i];
         }
@@ -1022,6 +1023,7 @@ class Solution {
  public:
  void Mirror(TreeNode *pRoot) {
     if(pRoot==NULL) return;
+    // 这里用queue也是可以的 牛客上验证过
     stack<TreeNode*> s;
     s.push(pRoot);
     while(!s.empty())
