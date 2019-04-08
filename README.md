@@ -968,7 +968,7 @@ public:
             return false;
         bool res = false;
         if (pRoot1->val == pRoot2->val)
-            return IsSubtree(pRoot1, pRoot2);
+            res = IsSubtree(pRoot1, pRoot2);
         if (!res)
             res = HasSubtree(pRoot1->left, pRoot2) || HasSubtree(pRoot1->right, pRoot2);
         return res;
