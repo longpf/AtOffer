@@ -1146,9 +1146,9 @@ private:
     stack<int> s1,s2;
 public:
     void push(int value) {
-        if (s1.size()>0 && s1.top()<value)
+        if (s1.size()>0 && s2.top()<value)
         {
-            s2.push(s1.top());
+            s2.push(s2.top());
         }
         else
         {
