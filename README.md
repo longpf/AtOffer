@@ -667,6 +667,18 @@ public:
 
 ### 12. 数值的整数次方
 
+推荐解法:
+
+```cpp
+double myPow(double x,int n){
+    if (n==0) return 1;
+    double half = myPow(x, n/2);
+    if (n%2==0) return half*half;
+    if (n>0) return half*half*x;
+    return half*half/x;
+}
+```
+
 解法1: 再看一次的解法,牛客网验证通过
 
 ```cpp
@@ -2097,7 +2109,7 @@ public:
  
  以514为例:
  个位中1出现的次数为53*1+1
- 十位中1出现的次数为5*10+4+1 (5*10位0~500,4+1为501~514中十位为1)
+ 十位中1出现的次数为5*10+4+1 (5*10为0~500,4+1为501~514中十位为1,因为510十位有1)
  百位中1出现的次数为0*100+100
  */
 
@@ -4214,9 +4226,9 @@ public:
 /*
  头文件 #include <algorithm>
        #include <functional>
- make_heap()建立堆,默认建立的是最大堆,建最小堆的话第三个参数传greater<int>()
+ make_heap()建立堆,把指定范围内的元素生成一个堆,默认建立的是最大堆,建最小堆的话第三个参数传greater<int>().
  push_heap()在堆中添加数据
- pop_heap()在堆中删除数据
+ pop_heap()在堆中删除数据,将first和last-1的元素交换,然后重新生成一个堆.并没有真正删除.删除再pop_back
  sort_heap()堆排序
  */
 
