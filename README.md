@@ -669,6 +669,26 @@ public:
 
 推荐解法:
 
+每次折半,效率更高
+
+[http://blog.longpengfei.com/post/50-pow/](http://blog.longpengfei.com/post/50-pow/)
+
+```cpp
+double myPow(double x,int n){
+    if (n==0) return 1;
+    double half = myPow(x, n/2);
+    if (n%2==0) {
+        return half*half;
+    }
+    if (n>0) {
+        return half*half*x;
+    }
+    return half*half/x;
+}
+```
+
+其他: 效率没上面高
+
 ```cpp
 double myPow(double x,int n){
     if (n==0) return 1;
@@ -4230,6 +4250,16 @@ public:
  push_heap()在堆中添加数据
  pop_heap()在堆中删除数据,将first和last-1的元素交换,然后重新生成一个堆.并没有真正删除.删除再pop_back
  sort_heap()堆排序
+ 
+使用:
+先建堆,
+
+push: vector 先push_back ,再push_heap
+pop: 先pop_heap,再 vector pop_back
+
+sort_heap 没啥用
+vector中的数据变化了 需要重新堆化, make_heap
+ 
  */
 
 /*
