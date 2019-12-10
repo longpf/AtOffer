@@ -142,44 +142,33 @@ int main()
 #include <stdlib.h>
 
 
-void replaceSpace(char *str, int length)
-{
-	if (str == NULL || length <= 0)
-		return;
-	int count = 0;
-	for(int i = 0;i<strlen(str);i++)
-	{
-		if (str[i] == ' ')
-			count++;
-	}
-	int newLength = strlen(str)+count*2+1;
-	if (newLength>length)
-		return;
-
-	int i = strlen(str) + 1;
-	int j = newLength;
-
-	// 直接用str 会报错 /bin/sh: line : Bus error: 10
-	char *tmpStr = str;
-	str = malloc(strlen(tmpStr)+1);
-
-	while(i >= 0 && j >= i)
-	{
-		if (tmpStr[i] == ' ')
-		{
-			str[j--] = '0';
-			str[j--] = '2';
-			str[j--] = '%';
-		}
-		else
-		{
-			str[j--] = tmpStr[i];
-		}
-		i--;
-	}
-
-	printf("%s\n", tmpStr);
-	printf("%s\n", str);
+void replaceSpace(char *str, int length){
+    if (str == nullptr || length==0) {
+        return;
+    }
+    int strLen = strlen(str);
+    int spaceNum = 0;
+    for (int i = 0; i<strLen; i++) {
+        if (str[i] == ' ') {
+            spaceNum++;
+        }
+    }
+    int newStrLength = strLen+spaceNum*2;
+    if (newStrLength > length) return;
+    int i = strLen,j = newStrLength;
+    char *tmpStr = (char *)malloc(newStrLength);
+    while (i >=0 && j>=0) {
+        if (str[i] == ' '){
+            tmpStr[j--] = '0';
+            tmpStr[j--] = '2';
+            tmpStr[j--] = '%';
+        }else{
+            tmpStr[j--] = str[i];
+        }
+        i--;
+    }
+    str = tmpStr;
+    tmpStr = nullptr;
 }
 
 
