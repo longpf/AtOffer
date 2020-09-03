@@ -4247,6 +4247,10 @@ public:
 
 如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值
 
+两种建堆方式,multiset内部是红黑树,类似堆,优先队列
+
+写法1
+
 ```cpp
 /*
  头文件 #include <algorithm>
@@ -4329,6 +4333,46 @@ private:
     vector<int> max; //大根堆
 };
 ```
+
+
+写法2
+
+```cpp
+class Solution {
+    multiset<int,greater<int>> max;
+    multiset<int,less<int>> min;
+public:
+    void Insert(int num)
+    {
+        if ((max.size()+min.size())%2==0) {
+            int tmp = num;
+            if (max.size() > 0 && *max.begin() > num) {
+                max.insert(num);
+                tmp = *max.begin();
+                max.erase(max.begin());
+            }
+            min.insert(tmp);
+        } else {
+            int tmp = num;
+            if (min.size() > 0 && *min.begin() < num) {
+                min.insert(num);
+                tmp = *min.begin();
+                min.erase(min.begin());
+            }
+            max.insert(tmp);
+        }
+    }
+    double GetMedian()
+    { 
+        if ((max.size()+min.size())%2==0){
+            return (*min.begin()+*max.begin()) / 2.0;
+        } else {
+            return *min.begin();
+        }
+    }
+};
+```
+
 
 <a id="滑动窗口的最大值"></a>
 
