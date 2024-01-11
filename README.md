@@ -1649,8 +1649,11 @@ vector<int> inResult;
 void InOrder(TreeNode* root)
 {
     if (root != NULL) {
+	    //遍历左子树： 调用 InOrder(root->left) 递归地遍历左子树。这确保了左子树的所有节点都会在当前节点之前被访问。
         InOrder(root->left);
+        //处理当前节点： 将当前节点的值 root->val 加入结果向量 inResult。由于这是中序遍历，当前节点的值会在左子树的节点之后，右子树的节点之前加入结果
         inResult.push_back(root->val);
+        //遍历右子树： 调用 InOrder(root->right) 递归地遍历右子树。这确保了右子树的所有节点都会在当前节点之后被访问。
         InOrder(root->right);
     }
 }
@@ -1696,12 +1699,13 @@ void PostOrder2(TreeNode* root)
     stack<TreeNode*> s;
     vector<int> result;
     TreeNode* p = root;
-    TreeNode* r =new TreeNode(0);
+    TreeNode* r = NULL; //  用于记录上一个访问过的节点
     while (p || !s.empty())
     {
         //走到最左边
         if (p)
         {
+        	// 将当前节点入栈，并移动到左子树
             s.push(p);
             p = p->left;
         }
@@ -1709,7 +1713,7 @@ void PostOrder2(TreeNode* root)
         {
             //取栈顶结点
             p  = s.top();
-            //如果右子树存在,且未被输出
+            // 如果存在右子树且右子树未被访问过，移动到右子树
             if (p->right&&p->right!=r)
             {
                 p = p->right;
@@ -1717,14 +1721,14 @@ void PostOrder2(TreeNode* root)
                 //在走到最左
                 p = p->left;
             }
-            //否则,访问栈顶结点并弹出
+            // 否则，表示左右子树都已经访问过，将当前节点值加入结果向量
             else
             {
                 result.push_back(p->val);
-                //记录该结点
+                // 记录当前节点已被访问
                 r = p;
                 s.pop();
-                //结点访问完后,重置p指针
+                //将p置为NULL，以便继续回溯到父节点
                 p = NULL;
             }
         }
